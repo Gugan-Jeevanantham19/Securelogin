@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Secure Access</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container slide-in">
+        <div class="form-header">
+            <div class="logo">
+                <i class="fas fa-lock"></i>
+                <span>SecureLogin</span>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to your account</p>
+        </div>
+        
+        <form id="loginForm" class="form-fade">
+            <div class="input-group">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="loginEmail" placeholder="Email address" required>
+                <div class="focus-line"></div>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <div class="focus-line"></div>
+                <span class="toggle-password" onclick="togglePassword('loginPassword')">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+            
+            <div class="options">
+                <label class="checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    <span class="checkmark"></span>
+                    Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            
+            <button type="button" onclick="login()" class="btn-primary">
+                <span class="btn-text">Sign In</span>
+                <i class="fas fa-arrow-right btn-icon"></i>
+            </button>
+            
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+            
+            <div class="social-login">
+                <button type="button" class="social-btn google">
+                    <i class="fab fa-google"></i>
+                    Google
+                </button>
+                <button type="button" class="social-btn github">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </button>
+            </div>
+            
+            <p class="error-message" id="loginError"></p>
+        </form>
+        
+        <div class="form-footer fade-up">
+            <p>Don't have an account? 
+                <a href="register.html" class="link-animated">Create account</a>
+            </p>
+        </div>
+        
+        <div class="notification" id="notification"></div>
+    </div>
+    
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
