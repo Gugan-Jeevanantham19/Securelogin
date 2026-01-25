@@ -228,7 +228,7 @@ For issues, suggestions, or contributions:
 
 ---
 
-**Last Updated**: March 2024  
+**Last Updated**: DEC 2025  
 **Version**: 1.0.0  
 
 ---
