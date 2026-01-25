@@ -3,86 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Secure Access</title>
+    <title>SecureNotes Application</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="background-animation"></div>
-    
-    <div class="container slide-in">
-        <div class="form-header">
-            <div class="logo">
-                <i class="fas fa-lock"></i>
-                <span>SecureLogin</span>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p>Loading SecureNotes</p>
+        </div>
+    </div>
+
+    <!-- Enhanced Weather Background -->
+    <div class="weather-bg" id="weatherBackground">
+        <!-- Elements created via JavaScript -->
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" style="display: none;">
+        <!-- Login Form -->
+        <div class="form-container login-container active">
+            <div class="form-box">
+                <h1 class="welcome-text">WEL<span class="accent">COME</span></h1>
+                <p class="subtitle">Login your account to start the service</p>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <input type="email" id="loginEmail" required>
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" required>
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <div class="options">
+                        <label class="remember">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                
+                <div class="switch-form">
+                    <p>Don't have an account?</p>
+                    <button id="showRegister" class="switch-btn">Sign Up</button>
+                </div>
+                
+                <div class="design-credit">
+                    <p>Secure Notes App</p>
+                </div>
             </div>
-            <h2>Welcome Back</h2>
-            <p class="subtitle">Sign in to your account</p>
+            
+            <!-- Welcome Panel for Login -->
+            <div class="welcome-panel login-welcome">
+                <div class="welcome-content">
+                    <h2>SIGN <span class="accent">IN</span></h2>
+                    <p>Welcome back! Please enter your credentials to access your notes.</p>
+                    <div class="welcome-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <form id="loginForm" class="form-fade">
-            <div class="input-group">
-                <i class="fas fa-envelope input-icon"></i>
-                <input type="email" id="loginEmail" placeholder="Email address" required>
-                <div class="focus-line"></div>
+        <!-- Register Form -->
+        <div class="form-container register-container">
+            <div class="form-box">
+                <h1 class="welcome-text">CREATE <span class="accent">ACCOUNT</span></h1>
+                <p class="subtitle">Join us to start creating secure notes</p>
+                
+                <form id="registerForm">
+                    <div class="input-group">
+                        <input type="text" id="registerUsername" required>
+                        <label for="registerUsername">
+                            <i class="fas fa-user"></i> Username
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="email" id="registerEmail" required>
+                        <label for="registerEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <!-- <div class="input-group">
+                        <input type="text" id="registerMobile" required>
+                        <label for="registerMobile">
+                            <i class="fas fa-phone"></i> WhatsApp Number
+                        </label>
+                        <span class="underline"></span>
+                    </div> -->
+                    
+                    <div class="input-group">
+                        <input type="password" id="registerPassword" required>
+                        <label for="registerPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="registerConfirmPassword" required>
+                        <label for="registerConfirmPassword">
+                            <i class="fas fa-lock"></i> Confirm Password
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-fill" id="registerPasswordStrength"></div>
+                        </div>
+                        <span id="registerStrengthText">Password strength</span>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                
+                <div class="switch-form">
+                    <p>Already have an account?</p>
+                    <button id="showLogin" class="switch-btn">Sign In</button>
+                </div>
             </div>
             
-            <div class="input-group">
-                <i class="fas fa-lock input-icon"></i>
-                <input type="password" id="loginPassword" placeholder="Password" required>
-                <div class="focus-line"></div>
-                <span class="toggle-password" onclick="togglePassword('loginPassword')">
-                    <i class="fas fa-eye"></i>
-                </span>
+            <!-- Welcome Panel for Register -->
+            <div class="welcome-panel register-welcome">
+                <div class="welcome-content">
+                    <h2>WEL<span class="accent">COME</span></h2>
+                    <p>Create your account to start saving your notes securely.</p>
+                    <div class="welcome-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
             </div>
-            
-            <div class="options">
-                <label class="checkbox">
-                    <input type="checkbox" id="rememberMe">
-                    <span class="checkmark"></span>
-                    Remember me
-                </label>
-                <a href="#" class="forgot-link">Forgot password?</a>
-            </div>
-            
-            <button type="button" onclick="login()" class="btn-primary">
-                <span class="btn-text">Sign In</span>
-                <i class="fas fa-arrow-right btn-icon"></i>
-            </button>
-            
-            <div class="divider">
-                <span>or continue with</span>
-            </div>
-            
-            <div class="social-login">
-                <button type="button" class="social-btn google">
-                    <i class="fab fa-google"></i>
-                    Google
-                </button>
-                <button type="button" class="social-btn github">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </button>
-            </div>
-            
-            <p class="error-message" id="loginError"></p>
-        </form>
-        
-        <div class="form-footer fade-up">
-            <p>Don't have an account? 
-                <a href="register.html" class="link-animated">Create account</a>
-            </p>
         </div>
         
-        <div class="notification" id="notification"></div>
+        <!-- Forgot Password Form -->
+        <div class="form-container forgot-container">
+            <div class="form-box">
+                <h1 class="welcome-text">RESET <span class="accent">PASSWORD</span></h1>
+                <p class="subtitle">Enter your email to reset password</p>
+                
+                <form id="forgotForm">
+                    <div class="input-group">
+                        <input type="email" id="forgotEmail" required>
+                        <label for="forgotEmail">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <span class="underline"></span>
+                    </div>
+                    
+                    <p class="reset-info">Enter your registered email to reset your password</p>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-key"></i> Verify Email
+                    </button>
+                </form>
+                
+                <div class="switch-form">
+                    <button id="backToLogin" class="switch-btn">Back to Login</button>
+                </div>
+            </div>
+            
+            <!-- Welcome Panel for Forgot Password -->
+            <div class="welcome-panel forgot-welcome">
+                <div class="welcome-content">
+                    <h2>FORGOT <span class="accent">PASSWORD</span></h2>
+                    <p>Enter your registered email address to reset your password. You'll need to verify your old password.</p>
+                    <div class="welcome-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+
+    <!-- Reset Password Modal -->
+    <div class="reset-modal" id="resetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sync-alt"></i> Reset Password</h3>
+                <button class="close-reset-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="account-info">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="account-details">
+                        <span id="resetAccountName">Account</span>
+                        <small id="resetEmailText">user@example.com</small>
+                    </div>
+                </div>
+                
+                <form id="resetPasswordForm">
+                    <div class="input-group-modal">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <div class="password-info">For security verification</div>
+                    </div>
+                    
+                    <div class="input-group-modal">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <div class="password-info">Minimum 6 characters</div>
+                    </div>
+                    
+                    <div class="input-group-modal">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                    </div>
+                    
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <div class="strength-fill" id="passwordStrength"></div>
+                        </div>
+                        <span id="strengthText">Password strength</span>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn full-width">
+                        <i class="fas fa-sync-alt"></i> Update Password
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- Dashboard (Initially Hidden) -->
+    <div class="dashboard-container" style="display: none;">
+        <nav class="dashboard-nav">
+            <div class="nav-left">
+                <h2><i class="fas fa-sticky-note"></i> <span class="accent">Secure</span> Notes</h2>
+            </div>
+            <div class="nav-right">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-details">
+                        <span id="userName">User</span>
+                        <small id="userEmail">user@example.com</small>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </nav>
+        
+        <div class="dashboard-content">
+            <div class="welcome-section">
+                <h1>Welcome back, <span id="dashboardUserName">User</span>!</h1>
+                <p>Here are your personal notes. All notes are automatically saved.</p>
+            </div>
+            
+            <div class="notes-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchNotes" placeholder="Search notes...">
+                </div>
+                <div class="notes-count">
+                    <span id="notesCount">0 notes</span>
+                </div>
+                <button id="addNoteBtn" class="add-note-btn">
+                    <i class="fas fa-plus"></i> Add Note
+                </button>
+            </div>
+            
+            <div class="notes-grid" id="notesGrid">
+                <!-- Notes will be dynamically added here -->
+            </div>
+            
+            <div class="empty-state" id="emptyState">
+                <i class="fas fa-sticky-note"></i>
+                <h3>No notes yet</h3>
+                <p>Click the "Add Note" button to create your first note</p>
+            </div>
+        </div>
+        
+        <!-- Note Modal -->
+        <div class="note-modal" id="noteModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Add New Note</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group-modal">
+                        <input type="text" id="noteTitle" placeholder="Note Title" required>
+                        <span class="char-count" id="titleCharCount">0/100</span>
+                    </div>
+                    <div class="input-group-modal">
+                        <textarea id="noteContent" placeholder="Write your note here..." rows="6" required></textarea>
+                        <span class="char-count" id="contentCharCount">0/1000</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary close-modal">Cancel</button>
+                        <button id="saveNoteBtn" class="btn-primary">Save Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>
